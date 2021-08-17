@@ -34,6 +34,7 @@ int main()
 
     string a, b;
     cin >> a >> b;
+    
     vector<int> v;
     v = stringSearch(a, b);
     for (auto i : v)
