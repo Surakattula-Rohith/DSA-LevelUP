@@ -78,32 +78,33 @@ void file_i_o()
     freopen("output.txt", "w", stdout);
 #endif
 }
-vector<string> fizzbuzz(int n)
+
+vector<int> pairSum(vector<int> arr, int s)
 {
-
-    vector<string> v;
-
-    for (int i = 1; i <= n; i++)
+    int n = arr.size();
+    unordered_set<int> ans;
+    vector<int> a;
+    loop(i, 0, n - 1)
     {
-        if (i % 15 == 0)
+        if (ans.empty())
         {
-            v.push_back("FizzBuzz");
-        }
-        else if (i % 5 == 0)
-        {
-            v.push_back("Buzz");
-        }
-        else if (i % 3 == 0)
-        {
-            v.push_back("Fizz");
+            ans.insert(arr[i]);
         }
         else
         {
-            v.push_back(std::to_string(i));
+            if (ans.find(s - arr[i]) == ans.end())
+            {
+                ans.insert(arr[i]);
+            }
+            else
+            {
+                a.push_back(s - arr[i]);
+                a.push_back(arr[i]);
+                return a;
+            }
         }
     }
-
-    return v;
+    return a;
 }
 
 int main(int argc, char const *argv[])
@@ -111,9 +112,21 @@ int main(int argc, char const *argv[])
     clock_t begin = clock();
     file_i_o();
 
-        // vector<string> s ;
-    // cin >> s ;
-    // cout << fizzbuzz(s) << nl ;
+    int n, s;
+    cin >> n >> s;
+
+    vector<int> arr(n);
+    loop(i, 0, n - 1)
+    {
+        cin >> arr[i];
+    }
+    vector<int> ans = pairSum(arr, s);
+
+    for (int i : ans)
+    {
+        cout << i << " ";
+    }
+    cout << nl;
 
 #ifndef ONLINE_JUDGE
     clock_t end = clock();

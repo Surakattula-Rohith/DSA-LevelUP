@@ -78,32 +78,56 @@ void file_i_o()
     freopen("output.txt", "w", stdout);
 #endif
 }
-vector<string> fizzbuzz(int n)
+
+vector<vector<int>> triplet(vector<int> arr, int n, int target)
 {
 
-    vector<string> v;
+    // loop(i, 0, n - 1)
+    // {
+    //     cout << arr[i] << " ";
+    // }
+    // cout << nl << nl;
 
-    for (int i = 1; i <= n; i++)
+    sort(arr.begin(), arr.end());
+
+    // loop(i, 0, n - 1)
+    // {
+    //     cout << arr[i] << " ";
+    // }
+    // cout << nl << nl;
+
+    vector<vector<int>> result;
+    loop(i, 0, n - 2)
     {
-        if (i % 15 == 0)
-        {
-            v.push_back("FizzBuzz");
+        int s = i + 1;
+        int e = n - 1;
+        while (s < e)
+        {   
+            // cout << i << " " << s << " " << e <<  nl;
+            if (arr[i] + arr[s] + arr[e] == target)
+            {
+                vector<int> temp;
+                temp.push_back(arr[i]);
+                temp.push_back(arr[s]);
+                temp.push_back(arr[e]);
+               
+                result.push_back(temp);
+                s++;
+                e--;
+                
+            }
+            else if (arr[i] + arr[s] + arr[e] > target)
+            {
+                e--;
+            }
+            else
+            {
+                s++;
+            }
         }
-        else if (i % 5 == 0)
-        {
-            v.push_back("Buzz");
-        }
-        else if (i % 3 == 0)
-        {
-            v.push_back("Fizz");
-        }
-        else
-        {
-            v.push_back(std::to_string(i));
-        }
+      
     }
-
-    return v;
+      return result;
 }
 
 int main(int argc, char const *argv[])
@@ -111,9 +135,26 @@ int main(int argc, char const *argv[])
     clock_t begin = clock();
     file_i_o();
 
-        // vector<string> s ;
-    // cin >> s ;
-    // cout << fizzbuzz(s) << nl ;
+    int n, s;
+    cin >> n >> s;
+
+    vector<int> arr(n);
+    loop(i, 0, n - 1)
+    {
+        cin >> arr[i];
+    }
+   
+    auto ans = triplet(arr, n, s);
+
+    for (auto i : ans)
+    {
+        for (auto j : i)
+        {
+            cout << j << " ";
+        }
+        cout << nl;
+    }
+    cout << nl;
 
 #ifndef ONLINE_JUDGE
     clock_t end = clock();

@@ -78,32 +78,26 @@ void file_i_o()
     freopen("output.txt", "w", stdout);
 #endif
 }
-vector<string> fizzbuzz(int n)
+int trapperWater(vector<int> arr)
 {
-
-    vector<string> v;
-
-    for (int i = 1; i <= n; i++)
+    int n = arr.size();
+    vector<int> left(n, 0);
+    vector<int> right(n, 0);
+    left[0] = arr[0];
+    right[n - 1] = arr[n - 1];
+    for (int i = 1; i < n; i++)
     {
-        if (i % 15 == 0)
-        {
-            v.push_back("FizzBuzz");
-        }
-        else if (i % 5 == 0)
-        {
-            v.push_back("Buzz");
-        }
-        else if (i % 3 == 0)
-        {
-            v.push_back("Fizz");
-        }
-        else
-        {
-            v.push_back(std::to_string(i));
-        }
+        left[i] = max(arr[i], left[i - 1]);
+        right[n - i - 1] = max(right[n - i], arr[n - i - 1]);
     }
 
-    return v;
+    int ans = 0;
+    for (int i = 0; i < n; i++)
+    {
+        int k = (min(left[i], right[i]) - arr[i]);
+        ans += k;
+    }
+    return ans;
 }
 
 int main(int argc, char const *argv[])
@@ -111,9 +105,14 @@ int main(int argc, char const *argv[])
     clock_t begin = clock();
     file_i_o();
 
-        // vector<string> s ;
-    // cin >> s ;
-    // cout << fizzbuzz(s) << nl ;
+    int n;
+    cin >> n;
+    vector<int> v(n);
+    loop(i, 0, n - 1)
+    {
+        cin >> v[i];
+    }
+    cout << trapperWater(v) << nl;
 
 #ifndef ONLINE_JUDGE
     clock_t end = clock();

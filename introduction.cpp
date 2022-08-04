@@ -78,42 +78,76 @@ void file_i_o()
     freopen("output.txt", "w", stdout);
 #endif
 }
-vector<string> fizzbuzz(int n)
-{
-
-    vector<string> v;
-
-    for (int i = 1; i <= n; i++)
-    {
-        if (i % 15 == 0)
-        {
-            v.push_back("FizzBuzz");
-        }
-        else if (i % 5 == 0)
-        {
-            v.push_back("Buzz");
-        }
-        else if (i % 3 == 0)
-        {
-            v.push_back("Fizz");
-        }
-        else
-        {
-            v.push_back(std::to_string(i));
-        }
-    }
-
-    return v;
-}
 
 int main(int argc, char const *argv[])
 {
     clock_t begin = clock();
     file_i_o();
+    // Arrays is Cpp
 
-        // vector<string> s ;
-    // cin >> s ;
-    // cout << fizzbuzz(s) << nl ;
+    int a[100];
+    int b[100] = {0};
+    int c[100] = {1, 2, 3, 4};
+    int d[] = {2, 3, 4, 5, 6};
+    string fruits[4] = {"apple", "mango"};
+
+    // Vectors
+
+    vector<int> arr;
+    cout << arr.size() << endl;
+
+    vector<int> v = {1, 2, 3, 4, 5, 6};
+
+    cout << v.size() << endl;
+    cout << v.capacity() << nl;
+
+    v.push_back(7);
+
+    cout << v.size() << endl;
+    cout << v.capacity() << nl;
+
+    loop(i, 0, v.size() - 1)
+    {
+        cout << v[i] << " ";
+    }
+    cout << nl;
+
+    v.pop_back();
+
+    loop(i, 0, v.size() - 1)
+    {
+        cout << v[i] << " ";
+    }
+    cout << nl << nl ;
+
+    vector<bool> visited(100, true);
+
+    //2D Vectors
+
+    vector<vector<int>> k=
+    {
+        {1,2,3,4},
+        {2,3,4},
+        {3,4,5,6,7,8,4},
+        {3}
+    };
+
+    loop(i , 0 , k.size()-1){
+        for(int n:k[i]){
+            cout << n << " ";
+
+        }cout << nl ;
+    }
+    cout << nl ;
+
+    k[0][1] += 10 ;
+     loop(i , 0 , k.size()-1){
+        for(int n:k[i]){
+            cout << n << " ";
+
+        }cout << nl ;
+    }
+
 
 #ifndef ONLINE_JUDGE
     clock_t end = clock();
